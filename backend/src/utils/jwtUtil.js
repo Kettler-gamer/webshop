@@ -13,7 +13,7 @@ function createToken(payload) {
 function verifyToken(token) {
   const payload = Jwt.verify(token, publicKey);
 
-  console.log(payload);
+  return payload;
 }
 
 export default { createToken, verifyToken };

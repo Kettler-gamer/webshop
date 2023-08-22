@@ -1,11 +1,19 @@
 import connection from "../db/mysql.js";
 
 async function getUsers() {
-  const test = await connection
+  const result = await connection
     .promise()
     .query("SELECT id, username, activated FROM users");
 
-  return test[0];
+  return result[0];
 }
 
-export default { getUsers };
+async function postUser(user) {
+  const result = await connection
+    .promise()
+    .query("INSERT INTO users (username, password, activated) values ?", user);
+
+  return result;
+}
+
+export default { getUsers, postUser };

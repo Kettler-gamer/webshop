@@ -4,4 +4,13 @@ function getUsers(req, res) {
   userService.getUsers().then((result) => res.send(result));
 }
 
-export default { getUsers };
+function createUser(req, res) {
+  userService
+    .postUser(req.user)
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((error) => res.send(error));
+}
+
+export default { getUsers, createUser };

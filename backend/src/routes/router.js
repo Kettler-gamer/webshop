@@ -1,10 +1,14 @@
 import express from "express";
 import userController from "../controllers/userController.js";
-import jwtUtil from "../utils/jwtUtil.js";
+import userFilters from "../filters/userFilters.js";
 
 const router = express.Router();
 
-router.get("/test", (req, res) => res.send("Hello World!"));
+router.post(
+  "/createuser",
+  userFilters.createUserFilter,
+  userController.createUser
+);
 
 router.get("/getusers", userController.getUsers);
 
