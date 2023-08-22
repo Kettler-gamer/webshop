@@ -14,6 +14,7 @@ router.post(
 );
 router.post("/auth/login", loginController.login);
 router.get("/items/getitems", itemController.getItems);
+router.get("/items/searchitems", itemController.searchItems);
 
 router.use(jwtFilter.checkToken);
 

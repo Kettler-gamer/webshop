@@ -12,14 +12,57 @@ function getItems(req, res) {
     });
 }
 
-function addItem(req, res) {
-  const { itemName, quantity, price, type } = req.body;
+function searchItems(req, res) {
+  console.log(req.query);
+  const { itemname, priceGreater, priceLower, type, inStock } = req.query;
 
-  if (!itemName || !quantity || !price || !type) {
-    res.status(400).send({ message: "Bad parameters!" });
+  const filters = [];
+
+  if (itemname)
+    filters.push({
+      column: "itemname",
+      value: itemname + "%",
+      operator: "LIKE ?",
+    });
+
+  if (type) {
+    filters.push({ column: "type", value: type, operator: "= ?" });
   }
 
-  const item = [itemName, quantity, price, type];
+  if (priceGreater) {
+    filters.push({ column: "price", value: priceGreater, operator: "> ?" });
+  }
+
+  if (priceLower) {
+    filters.push({ column: "price", value: priceLower, operator: "< ?" });
+  }
+
+  if (inStock) {
+    filters.push({ column: "quantity", value: "", operator: "> 0" });
+  }
+
+  itemService
+    .searchItems(filters)
+    .then((result) => {
+      res.send(result[0]);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+function addItem(req, res) {
+  const { itemName, quantity, price, type, image } = req.body;
+
+  if (
+    itemName === undefined ||
+    quantity === undefined ||
+    price === undefined ||
+    type === undefined
+  )
+    return res.status(400).send({ message: "Bad parameters!" });
+
+  const item = [itemName, quantity, price, type, image];
 
   itemService
     .addItem(item)
@@ -47,4 +90,4 @@ function addItem(req, res) {
     });
 }
 
-export default { getItems, addItem };
+export default { getItems, searchItems, addItem };
