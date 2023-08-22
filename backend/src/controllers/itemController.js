@@ -13,7 +13,6 @@ function getItems(req, res) {
 }
 
 function searchItems(req, res) {
-  console.log(req.query);
   const { itemname, priceGreater, priceLower, type, inStock } = req.query;
 
   const filters = [];
@@ -62,7 +61,9 @@ function addItem(req, res) {
   )
     return res.status(400).send({ message: "Bad parameters!" });
 
-  const item = [itemName, quantity, price, type, image];
+  const item = [itemName, quantity, price, type];
+
+  if (image !== undefined) item.push(image);
 
   itemService
     .addItem(item)

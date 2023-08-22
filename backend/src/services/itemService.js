@@ -28,8 +28,9 @@ async function searchItems(filters) {
 }
 
 async function addItem(item) {
-  const sql =
-    "INSERT INTO items (itemName, quantity, price, type) VALUES (?,?,?,?)";
+  const sql = `INSERT INTO items (itemName, quantity, price, type${
+    item.length === 5 ? ", image" : ""
+  }) VALUES (?,?,?,?${item.length === 5 ? ", ?" : ""})`;
 
   const result = await connection.promise().query(sql, item);
 
