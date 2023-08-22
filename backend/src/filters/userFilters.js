@@ -10,7 +10,7 @@ function createUserFilter(req, res, next) {
     errors.push("Password must be 8 characters or longer!");
 
   if (errors.length === 0) {
-    req.user = { username, password, activated: true };
+    req.user = { username, password };
     next();
   } else {
     res.status(400).send(errors);
