@@ -10,6 +10,8 @@ router.post(
   userController.createUser
 );
 
+router.post("/auth/login");
+
 router.get("/getusers", userController.getUsers);
 
 export default router;

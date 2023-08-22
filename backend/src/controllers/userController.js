@@ -14,16 +14,26 @@ function createUser(req, res) {
     .hashPassword(user.password)
     .then((hashedPassword) => {
       user.password = hashedPassword;
-      console.log("userController");
-      console.log(user);
+
       return userService.postUser(user);
     })
     .then((result) => {
-      console.log("userController");
-      console.log("After");
-      res.send(result);
+      if (result[0].affectedRows === 1) {
+        res.status(201).send({ message: "Account was created!" });
+      } else throw new Error(result.code);
     })
-    .catch((error) => res.send(error));
+    .catch((error) => {
+      switch (error.code) {
+        case "ER_DUP_ENTRY":
+          res.status(400).send({ message: "That username is already taken!" });
+          break;
+        default:
+          console.log(error);
+          res
+            .status(500)
+            .send({ message: "Something went wrong!, Try again later!" });
+      }
+    });
 }
 
 export default { getUsers, createUser };
