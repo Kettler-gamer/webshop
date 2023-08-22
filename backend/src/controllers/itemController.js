@@ -1,5 +1,17 @@
 import itemService from "../services/itemService.js";
 
+function getItems(req, res) {
+  itemService
+    .getItems()
+    .then((result) => {
+      res.send(result[0]);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send({ message: "Something went wrong!" });
+    });
+}
+
 function addItem(req, res) {
   const { itemName, quantity, price, type } = req.body;
 
@@ -35,4 +47,4 @@ function addItem(req, res) {
     });
 }
 
-export default { addItem };
+export default { getItems, addItem };

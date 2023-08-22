@@ -13,6 +13,7 @@ router.post(
   userController.createUser
 );
 router.post("/auth/login", loginController.login);
+router.get("/items/getitems", itemController.getItems);
 
 router.use(jwtFilter.checkToken);
 
