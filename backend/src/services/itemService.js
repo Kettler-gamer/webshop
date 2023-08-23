@@ -20,8 +20,6 @@ async function searchItems(filters) {
 
   const finalSQL = sql + filterSQLArr.join(" AND ");
 
-  console.log(finalSQL);
-
   const result = await connection.promise().query(finalSQL, searchValues);
 
   return result;

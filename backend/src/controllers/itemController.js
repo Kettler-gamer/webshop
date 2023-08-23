@@ -17,12 +17,11 @@ function searchItems(req, res) {
 
   const filters = [];
 
-  if (itemname)
-    filters.push({
-      column: "itemname",
-      value: itemname + "%",
-      operator: "LIKE ?",
-    });
+  filters.push({
+    column: "itemname",
+    value: "%" + escapeSearchInput(itemname || "") + "%",
+    operator: "LIKE ?",
+  });
 
   if (type) {
     filters.push({ column: "type", value: type, operator: "= ?" });
@@ -105,6 +104,10 @@ function isImage(image) {
     dataPart === "data:image/jpg;base64" ||
     dataPart === "data:image/jpeg;base64"
   );
+}
+
+function escapeSearchInput(searchInput) {
+  return searchInput.replaceAll("%", "\\%").replaceAll("_", "\\_");
 }
 
 export default { getItems, searchItems, addItem };
