@@ -63,7 +63,13 @@ function addItem(req, res) {
 
   const item = [itemName, quantity, price, type];
 
-  if (image !== undefined) item.push(image);
+  if (image !== undefined) {
+    if (!isImage(image))
+      return res
+        .status(400)
+        .send({ message: "Image provided is not in a supported format!" });
+    item.push(image);
+  }
 
   itemService
     .addItem(item)
@@ -89,6 +95,16 @@ function addItem(req, res) {
           res.status(500).send({ message: "Something went wrong!" });
       }
     });
+}
+
+function isImage(image) {
+  const dataPart = image.split(",")[0];
+
+  return (
+    dataPart === "data:image/png;base64" ||
+    dataPart === "data:image/jpg;base64" ||
+    dataPart === "data:image/jpeg;base64"
+  );
 }
 
 export default { getItems, searchItems, addItem };
