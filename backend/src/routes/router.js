@@ -4,6 +4,7 @@ import userFilters from "../filters/userFilters.js";
 import loginController from "../controllers/loginController.js";
 import jwtFilter from "../filters/jwtFilter.js";
 import itemController from "../controllers/itemController.js";
+import purchaseFilter from "../filters/purchaseFilter.js";
 
 const router = express.Router();
 
@@ -18,7 +19,14 @@ router.get("/items/searchitems", itemController.searchItems);
 
 router.use(jwtFilter.checkToken);
 
+router.post(
+  "/items/purchase",
+  purchaseFilter.checkItemQuantity,
+  itemController.purchaseItems
+);
+
 router.use(jwtFilter.isAdmin);
+
 router.get("/getusers", userController.getUsers);
 router.post("/items/additem", itemController.addItem);
 

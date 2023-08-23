@@ -35,4 +35,58 @@ async function addItem(item) {
   return result;
 }
 
-export default { getItems, searchItems, addItem };
+async function getItemsQuantity(items) {
+  const sql = "SELECT itemname, quantity FROM items WHERE ";
+  const itemNames = items.map((item) => item.itemname);
+  const itemsSql = itemNames.map(() => "itemname = ?").join(" OR ");
+
+  const finalSql = sql + itemsSql;
+  const result = await connection.promise().query(finalSql, itemNames);
+  return result[0];
+}
+
+async function purchaseItems(items, itemsFromDb, username) {
+  const itemQtyUpdateTemplate = `UPDATE items SET quantity = ?qty? WHERE itemname = "?itemname?"`;
+
+  const sql =
+    itemsFromDb
+      .map((item, index) =>
+        itemQtyUpdateTemplate
+          .replace("?qty?", `${item.quantity - items[index].quantity}`)
+          .replace("?itemname?", `${item.itemname}`)
+      )
+      .join("; \n") + ";\n";
+
+  const date = new Date().toLocaleString();
+
+  const orderSql = `INSERT INTO orders (date) VALUES ("${date}");\n`;
+
+  const userOrdersSql = `INSERT INTO userorders (userID, orderID) SELECT users.id, max(orders.id) FROM users INNER JOIN orders WHERE users.username = "${username}";\n`;
+
+  const orderitemsSqltemplate = `INSERT INTO orderitems (orderID, itemID, amount) SELECT max(orders.id), items.id, ?quantity? FROM orders INNER JOIN items WHERE items.itemname = "?itemname?";\n`;
+
+  const orderItemsSql = items
+    .map((item) =>
+      orderitemsSqltemplate
+        .replace("?itemname?", item.itemname)
+        .replace("?quantity?", item.quantity)
+    )
+    .join("");
+
+  const finalSQL = sql + orderSql + userOrdersSql + orderItemsSql;
+  console.log(finalSQL);
+
+  const result = await connection
+    .promise()
+    .query(finalSQL.replaceAll("\n", ""));
+
+  return result[0];
+}
+
+export default {
+  getItems,
+  searchItems,
+  addItem,
+  getItemsQuantity,
+  purchaseItems,
+};

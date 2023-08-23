@@ -96,6 +96,22 @@ function addItem(req, res) {
     });
 }
 
+function purchaseItems(req, res) {
+  const { items } = req.body;
+  const { itemsFromDb } = req;
+  const { jwtPayload } = req;
+
+  itemService
+    .purchaseItems(items, itemsFromDb, jwtPayload.username)
+    .then(() => {
+      res.status(201).send({ message: "Thank you for your order!" });
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send({ message: "Something went wrong!" });
+    });
+}
+
 function isImage(image) {
   const dataPart = image.split(",")[0];
 
@@ -110,4 +126,4 @@ function escapeSearchInput(searchInput) {
   return searchInput.replaceAll("%", "\\%").replaceAll("_", "\\_");
 }
 
-export default { getItems, searchItems, addItem };
+export default { getItems, searchItems, addItem, purchaseItems };
