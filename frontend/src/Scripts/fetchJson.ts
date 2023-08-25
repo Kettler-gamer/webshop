@@ -1,12 +1,12 @@
 export default async function fetchJson(url: string, method: string, body:object = {}){
     const headers: HeadersInit = [
         [ "Content-Type", "application/json"],
-        [ "Authorization", sessionStorage.getItem("token") || ""],
-        [ "Method", method]
+        [ "Authorization", sessionStorage.getItem("token") || ""]
     ]
 
     const fetchOptions: RequestInit = {
-        headers
+        headers,
+        method
     }
 
     if(method !== "GET"){
