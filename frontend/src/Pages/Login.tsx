@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { LoginProps, TokenPayload } from "../Interfaces/LoginProps";
 import fetchJson from "../Scripts/fetchJson"
+import { getJwtPayload } from "../Scripts/sessionService";
 
-export function Login(){
+export function Login({setUserRole}: LoginProps){
 
     const navigate: NavigateFunction = useNavigate();
 
@@ -24,6 +26,8 @@ export function Login(){
 
         if(response.status < 400){
             sessionStorage.setItem("token", responseJson.token);
+            const payload: TokenPayload = getJwtPayload() as TokenPayload;
+            setUserRole(payload.role);
             navigate("/");
         }
         

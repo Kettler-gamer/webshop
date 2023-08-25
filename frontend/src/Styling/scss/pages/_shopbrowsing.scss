@@ -5,42 +5,6 @@
     padding: 1.75em 0;
     display: flex;
     justify-content: center;
-
-    .search-input-container {
-      background-color: $CSearchBackground;
-      width: 15em;
-      height: 2.5em;
-      border-radius: 4em;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      box-shadow: 0 0 15px grey;
-
-      .search-input {
-        width: 80%;
-        height: 100%;
-        padding: 0 0 0 0.25em;
-        font-size: 1.12rem;
-        border: none;
-        outline: none;
-      }
-
-      .magnifying-glas {
-        scale: 0.8;
-        .outer-circle {
-          fill: $CIcon;
-        }
-        .inner-circle {
-          fill: $CSearchBackground;
-        }
-        .handle {
-          transform-box: fill-box;
-          transform-origin: center;
-          transform: rotateZ(45deg);
-          fill: $CIcon;
-        }
-      }
-    }
   }
 }
 
