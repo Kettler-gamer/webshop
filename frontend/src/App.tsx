@@ -26,7 +26,7 @@ function App() {
     <Routes>
       <Route index element={<ShopBrowsing />}/>
       <Route path="/login" element={<Login setUserRole={setUserRole}/>}/>
-      {userRole === "ADMIN" && <Route path="/admin" element={<Admin />}/>}
+      {userRole === "ADMIN" && <Route path="/admin*" element={<Admin />}/>}
     </Routes>
     </BrowserRouter>
   );
