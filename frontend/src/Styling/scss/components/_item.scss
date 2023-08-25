@@ -1,0 +1,46 @@
+@use "../abstract/variables" as *;
+
+.item-container {
+  .item {
+    width: 8.5em;
+    background-color: $CItemCont;
+    border-radius: 0.5em;
+    padding: 1em;
+    box-shadow: 0 0 15px grey;
+
+    .item-picture {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      width: 90%;
+      height: 8em;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      p {
+        text-align: center;
+        color: $CNoPicText;
+        width: 6em;
+      }
+      .item-add-to-cart-btn {
+        position: absolute;
+        bottom: -0.5em;
+        right: -1.25em;
+        font-size: 0.85rem;
+        padding: 0.5em 0.5em;
+        border-radius: 1em;
+        border: none;
+      }
+    }
+
+    p {
+      color: $CItemText;
+      margin: 0.5em 0;
+    }
+
+    .item-name {
+      font-size: 1.25rem;
+    }
+  }
+}

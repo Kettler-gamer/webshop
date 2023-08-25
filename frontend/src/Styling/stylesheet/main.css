@@ -1,0 +1,126 @@
+.item-container .item {
+  width: 8.5em;
+  background-color: #6f6b5f;
+  border-radius: 0.5em;
+  padding: 1em;
+  box-shadow: 0 0 15px grey;
+}
+.item-container .item .item-picture {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  width: 90%;
+  height: 8em;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.item-container .item .item-picture p {
+  text-align: center;
+  color: white;
+  width: 6em;
+}
+.item-container .item .item-picture .item-add-to-cart-btn {
+  position: absolute;
+  bottom: -0.5em;
+  right: -1.25em;
+  font-size: 0.85rem;
+  padding: 0.5em 0.5em;
+  border-radius: 1em;
+  border: none;
+}
+.item-container .item p {
+  color: #ffe584;
+  margin: 0.5em 0;
+}
+.item-container .item .item-name {
+  font-size: 1.25rem;
+}
+
+.header {
+  background-color: #ffdf6a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 15px black;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+.header *:first-child {
+  margin-left: 0.75em;
+}
+.header *:last-child {
+  margin-right: 0.75em;
+}
+.header .header-title {
+  color: #6f6b5f;
+  font-weight: bolder;
+  font-size: 2.25rem;
+}
+.header .header-btns .profile-btn {
+  scale: 0.66;
+}
+.header .header-btns .head,
+.header .header-btns .body {
+  fill: white;
+}
+
+.shop-browsing .browsing-search {
+  padding: 1.75em 0;
+  display: flex;
+  justify-content: center;
+}
+.shop-browsing .browsing-search .search-input-container {
+  background-color: #6f6b5f;
+  width: 15em;
+  height: 2.5em;
+  border-radius: 4em;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 0 15px grey;
+}
+.shop-browsing .browsing-search .search-input-container .search-input {
+  width: 80%;
+  height: 100%;
+  padding: 0 0 0 0.25em;
+  font-size: 1.12rem;
+  border: none;
+  outline: none;
+}
+.shop-browsing .browsing-search .search-input-container .magnifying-glas {
+  scale: 0.8;
+}
+.shop-browsing .browsing-search .search-input-container .magnifying-glas .outer-circle {
+  fill: white;
+}
+.shop-browsing .browsing-search .search-input-container .magnifying-glas .inner-circle {
+  fill: #6f6b5f;
+}
+.shop-browsing .browsing-search .search-input-container .magnifying-glas .handle {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: rotateZ(45deg);
+  fill: white;
+}
+
+.item-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  margin: 0 auto;
+  -moz-column-gap: 0.75em;
+       column-gap: 0.75em;
+  row-gap: 0.75em;
+  justify-content: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #e2d39d;
+}/*# sourceMappingURL=main.css.map */
