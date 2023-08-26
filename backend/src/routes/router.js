@@ -6,6 +6,7 @@ import jwtFilter from "../filters/jwtFilter.js";
 import itemController from "../controllers/itemController.js";
 import purchaseFilter from "../filters/purchaseFilter.js";
 import orderController from "../controllers/orderController.js";
+import limiter from "../filters/rateLimit.js";
 
 const router = express.Router();
 
@@ -14,11 +15,11 @@ router.post(
   userFilters.createUserFilter,
   userController.createUser
 );
-router.post("/auth/login", loginController.login);
+router.post("/auth/login", limiter, loginController.login);
 router.get("/items/getitems", itemController.getItems);
 router.get("/items/searchitems", itemController.searchItems);
 
-router.use(jwtFilter.checkToken);
+router.use(limiter, jwtFilter.checkToken);
 
 router.post(
   "/items/purchase",
