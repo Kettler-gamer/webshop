@@ -63,22 +63,17 @@ async function purchaseItems(items, itemsFromDb, username) {
 
   const userOrdersSql = `INSERT INTO userorders (userID, orderID) SELECT users.id, max(orders.id) FROM users INNER JOIN orders WHERE users.username = "${username}";\n`;
 
-  const orderitemsSqltemplate = `INSERT INTO orderitems (orderID, itemID, amount) SELECT max(orders.id), items.id, ?quantity? FROM orders INNER JOIN items WHERE items.itemname = "?itemname?";\n`;
+  const orderitemsSqltemplate = `INSERT INTO orderitems (orderID, itemID, amount) SELECT max(orders.id), items.id, ? FROM orders INNER JOIN items WHERE items.itemname = ?;\n`;
 
-  const orderItemsSql = items
-    .map((item) =>
-      orderitemsSqltemplate
-        .replace("?itemname?", item.itemname)
-        .replace("?quantity?", item.quantity)
-    )
-    .join("");
+  const orderItemsSql = items.map(() => orderitemsSqltemplate).join("");
+
+  const itemValues = items.map((item) => [item.quantity, item.itemname]).flat();
 
   const finalSQL = sql + orderSql + userOrdersSql + orderItemsSql;
-  console.log(finalSQL);
 
   const result = await connection
     .promise()
-    .query(finalSQL.replaceAll("\n", ""));
+    .query(finalSQL.replaceAll("\n", ""), itemValues);
 
   return result[0];
 }
