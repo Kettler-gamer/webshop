@@ -1,12 +1,8 @@
 import { ItemProps } from "../Interfaces/ItemProps";
 import noProdImg from "../Assets/pictures/No_ProductImg.webp";
-import { useState } from "react";
 
 export default function Item({item}:ItemProps) {
-
-    const [itemImage, setItemImage] = useState<string>(`url(${item.image || noProdImg})`);
-
-    const itemPictureStyle = { backgroundImage: itemImage  }
+    const itemPictureStyle = { backgroundImage: `url(${item.image || noProdImg})`  }
 
     const itemPicture = 
     <div className="item-picture" style={itemPictureStyle}>

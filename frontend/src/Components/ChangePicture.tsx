@@ -1,9 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { ItemProps } from "../Interfaces/ItemProps";
 import fetchJson from "../Scripts/fetchJson";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function ChangePicture({item}: ItemProps){
-
+    const navigate = useNavigate();
     const [image, setImage] = useState<string>();
 
     async function onSubmit(e:FormEvent<HTMLFormElement>){
@@ -32,6 +34,10 @@ export function ChangePicture({item}: ItemProps){
         
         fileReader.readAsDataURL(files[0])
     }
+
+    useEffect(() => {
+        if(item === undefined) navigate("/admin");
+    },[navigate, item]);
 
     return (
     <div className="black-background">

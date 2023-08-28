@@ -15,8 +15,3 @@ export interface ItemValues{
     quantity: number,
     type: string
 }
-
-interface ImageValue {
-    data: BlobPart[],
-    type: string
-}
