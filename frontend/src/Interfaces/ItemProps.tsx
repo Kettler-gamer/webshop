@@ -10,8 +10,13 @@ export interface ItemProps{
 
 export interface ItemValues{
     itemname: string,
-    image?: string,
+    image?: string | null,
     price: number,
     quantity: number,
+    type: string
+}
+
+interface ImageValue {
+    data: BlobPart[],
     type: string
 }

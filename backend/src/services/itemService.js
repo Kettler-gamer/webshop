@@ -1,7 +1,8 @@
 import connection from "../db/mysql.js";
 
 async function getItems() {
-  const sql = "SELECT itemname, quantity, price, type, image FROM items";
+  const sql =
+    "SELECT itemname, quantity, price, type, convert(image using utf8mb4) as image FROM items";
 
   const result = await connection.promise().query(sql);
 
@@ -9,7 +10,8 @@ async function getItems() {
 }
 
 async function searchItems(filters) {
-  const sql = "SELECT itemname, quantity, price, type, image FROM items WHERE ";
+  const sql =
+    "SELECT itemname, quantity, price, type, convert(image using utf8mb4) as image FROM items WHERE ";
 
   const filterSQLArr = [];
   const searchValues = [];

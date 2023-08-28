@@ -10,7 +10,11 @@ export default function ShopBrowsing(){
 
     
     useEffect(() => {
-        fetchJson("/items/getitems","GET").then(result => result.json()).then(data => setItems(data));
+        fetchJson("/items/getitems","GET").then(result => 
+            result.json()
+        ).then(data => {
+            setItems(data)
+        });
     },[]);
 
     return (<main className="shop-browsing">
