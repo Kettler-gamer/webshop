@@ -112,6 +112,37 @@ function purchaseItems(req, res) {
     });
 }
 
+function updateItemImage(req, res) {
+  console.log("Update image route");
+  const { itemName, image } = req.body;
+
+  console.log(itemName, image);
+
+  if (!isImage(image))
+    return res
+      .status(400)
+      .send({ message: "Image file provided is not an image!" });
+
+  itemService
+    .updateItemImage(itemName, image)
+    .then((result) => {
+      if (result.changedRows === 1) {
+        res.status(200).send({ message: "The image was updated!" });
+      } else {
+        res.status(400).send({
+          message:
+            "The image was not updated! Make sure the item exists in the shop!",
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send({
+        message: "Something went wrong! Please try again!",
+      });
+    });
+}
+
 function isImage(image) {
   const dataPart = image.split(",")[0];
 
@@ -126,4 +157,10 @@ function escapeSearchInput(searchInput) {
   return searchInput.replaceAll("%", "\\%").replaceAll("_", "\\_");
 }
 
-export default { getItems, searchItems, addItem, purchaseItems };
+export default {
+  getItems,
+  searchItems,
+  addItem,
+  purchaseItems,
+  updateItemImage,
+};

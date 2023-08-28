@@ -33,5 +33,6 @@ router.use(jwtFilter.isAdmin);
 
 router.get("/getusers", userController.getUsers);
 router.post("/items/additem", itemController.addItem);
+router.patch("/items/updateitemimage", itemController.updateItemImage);
 
 export default router;

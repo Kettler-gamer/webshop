@@ -78,10 +78,19 @@ async function purchaseItems(items, itemsFromDb, username) {
   return result[0];
 }
 
+async function updateItemImage(itemname, image) {
+  const sql = "UPDATE items SET image = ? WHERE itemname = ?";
+
+  const result = await connection.promise().query(sql, [image, itemname]);
+
+  return result;
+}
+
 export default {
   getItems,
   searchItems,
   addItem,
   getItemsQuantity,
   purchaseItems,
+  updateItemImage,
 };
