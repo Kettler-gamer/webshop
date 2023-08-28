@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { ItemProps } from "../Interfaces/ItemProps";
+import fetchJson from "../Scripts/fetchJson";
 
 export function ChangePicture({item}: ItemProps){
 
@@ -8,7 +9,16 @@ export function ChangePicture({item}: ItemProps){
     async function onSubmit(e:FormEvent<HTMLFormElement>){
         e.preventDefault();
 
+        console.log(item);
+
         if(image === undefined || image === "") return;
+
+        const result = await fetchJson("/items/updateitemimage", "PATCH", {itemName:item.itemname, image: image});
+
+        const resultJson = await result.json();
+
+        console.log(resultJson);
+        
     }
 
     function chosenFile(e:ChangeEvent){

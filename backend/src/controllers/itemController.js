@@ -113,10 +113,7 @@ function purchaseItems(req, res) {
 }
 
 function updateItemImage(req, res) {
-  console.log("Update image route");
   const { itemName, image } = req.body;
-
-  console.log(itemName, image);
 
   if (!isImage(image))
     return res
@@ -126,8 +123,12 @@ function updateItemImage(req, res) {
   itemService
     .updateItemImage(itemName, image)
     .then((result) => {
-      if (result.changedRows === 1) {
+      if (result[0].changedRows === 1) {
         res.status(200).send({ message: "The image was updated!" });
+      } else if (result[0].affectedRows === 1) {
+        res.status(400).send({
+          message: "The image provided is the exact image already in the item!",
+        });
       } else {
         res.status(400).send({
           message:
