@@ -9,7 +9,7 @@ import orderController from "../controllers/orderController.js";
 import limiter from "../filters/rateLimit.js";
 
 const router = express.Router();
-
+router.get("/ip", (request, response) => response.send(request.ip));
 router.post(
   "/createuser",
   userFilters.createUserFilter,

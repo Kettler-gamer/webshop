@@ -147,7 +147,6 @@ function updateItemImage(req, res) {
 function isImage(image) {
   const dataPart = image.split(",")[0];
 
-  console.log(dataPart);
   return (
     dataPart === "data:image/png;base64" ||
     dataPart === "data:image/jpg;base64" ||
