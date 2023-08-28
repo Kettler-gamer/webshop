@@ -1,5 +1,7 @@
 @use "./abstract/variables" as *;
 @use "./components/item" as *;
+@use "./components/blackBackground" as *;
+@use "./components/itemImageEdit" as *;
 @use "./components/itemsearch" as *;
 @use "./components/header" as *;
 @use "./pages/shopbrowsing" as *;

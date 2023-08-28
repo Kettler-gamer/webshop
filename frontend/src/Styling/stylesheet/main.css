@@ -38,6 +38,51 @@
   font-size: 1.25rem;
 }
 
+.black-background {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100vw;
+  height: 100vh;
+}
+
+.black-background .image-change-form {
+  background-color: #e2d39d;
+  border-radius: 0.25em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 90vw;
+  height: 30em;
+  position: relative;
+  margin: 4em auto;
+  padding: 0.5em 0;
+  box-shadow: 0 0 25px black;
+  overflow-y: scroll;
+}
+.black-background .image-change-form button,
+.black-background .image-change-form .img-label {
+  background-color: #6f6b5f;
+  border: 1px solid black;
+  padding: 0.25em;
+  font-size: 1.25rem;
+  border-radius: 0.25em;
+  color: #ffdf6a;
+}
+.black-background .image-change-form button:disabled {
+  background-color: black;
+  color: grey;
+}
+.black-background .image-change-form img {
+  max-width: 256px;
+}
+.black-background .image-change-form input[type=file] {
+  display: none;
+}
+
 .search-input-container {
   background-color: #6f6b5f;
   width: 15em;

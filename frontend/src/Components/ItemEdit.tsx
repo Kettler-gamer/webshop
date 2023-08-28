@@ -2,7 +2,7 @@ import { ItemEditProps } from "../Interfaces/ItemProps";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import noProdImg from "../Assets/pictures/No_ProductImg.webp";
 
-export function ItemEdit({item, setSelectedItem}: ItemEditProps){
+export function ItemEdit({item, setSelectedItem}: ItemEditProps) {
     const itemPictureStyle = { backgroundImage: `url(${item.image || noProdImg})` }
     const navigate: NavigateFunction = useNavigate();
 
@@ -12,7 +12,7 @@ export function ItemEdit({item, setSelectedItem}: ItemEditProps){
         <button className="item-add-to-cart-btn" onClick={changePictureClick}>Ändra bild</button>
     </div>;
 
-    function changePictureClick(){
+    function changePictureClick() {
         setSelectedItem(item);
         navigate("/admin/changepicture");
     }

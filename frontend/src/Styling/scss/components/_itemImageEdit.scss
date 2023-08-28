@@ -1,0 +1,42 @@
+@use "../abstract/variables" as *;
+
+.black-background {
+  .image-change-form {
+    background-color: $CBackground;
+    border-radius: 0.25em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 90vw;
+    height: 30em;
+    position: relative;
+    margin: 4em auto;
+    padding: 0.5em 0;
+    box-shadow: 0 0 25px black;
+    overflow-y: scroll;
+
+    button,
+    .img-label {
+      background-color: $CHeaderTitle;
+      border: 1px solid black;
+      padding: 0.25em;
+      font-size: 1.25rem;
+      border-radius: 0.25em;
+      color: $CHeader;
+    }
+
+    button:disabled {
+      background-color: black;
+      color: grey;
+    }
+
+    img {
+      max-width: 256px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+  }
+}
